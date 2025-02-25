@@ -11,6 +11,7 @@ import { LogInSchema } from "@/lib/zod";
 import { z } from "zod";
 import { handleCredentialSignin } from "@/action/authActions";
 import ErrorMessage from "@/components/errorMessage";
+import Link from "next/link";
 
 export default function SignInPage() {
     const [globalError, setGlobalError] = useState<string>("");
@@ -30,7 +31,7 @@ export default function SignInPage() {
                 setGlobalError(result.message);
             }
         } catch (error: any) {
-            console.log("Something went wrong")
+            console.log("Something went wrong");
         }
     }
 
@@ -47,7 +48,7 @@ export default function SignInPage() {
                     <Form {...form}>
                         <form
                             onSubmit={form.handleSubmit(onSubmit)}
-                            className="space-y-8"
+                            className="space-y-3"
                         >
                             <FormField
                                 control={form.control}
@@ -59,7 +60,6 @@ export default function SignInPage() {
                                             <Input
                                                 type="email"
                                                 placeholder="Enter your email address"
-                                                autoComplete="off"
                                                 {...field}
                                             />
                                         </FormControl>
@@ -85,8 +85,11 @@ export default function SignInPage() {
                                     </FormItem>
                                 )}
                             />
-
                             <Button type="submit">SignIn</Button>
+                            <div className="flex gap-1.5">
+                                <p>Don't have an account?</p>
+                                <Link href={"/auth/register"} className="text-blue-600 underline">Register</Link>
+                            </div>
                         </form>
                     </Form>
                 </CardContent>

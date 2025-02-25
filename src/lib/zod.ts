@@ -20,3 +20,12 @@ export const RegisterSchema = object({
     email: UserEmailSchema,
     password: UserPasswordSchema
 });
+
+export const PostSchema = object({
+    title: z.string({required_error: "Title is required"})
+        .min(1, {message: "Title must be 1 or more characters long"})
+        .max(30, {message: "Title must be 30 or less characters long"}),
+    content: z.string({required_error: "Content is required"})
+        .min(1, {message: "Content must be 1 or more characters long"})
+        .max(300, {message: "Title must be 30 or less characters long"})
+});

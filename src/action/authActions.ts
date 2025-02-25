@@ -8,7 +8,7 @@ export async function handleCredentialSignin({ email, password }: {
     password: string
 }) {
     try {
-        await signIn("credentials", { email, password, redirectTo: "/" });
+        await signIn("credentials", { email, password, redirectTo: "/user" });
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {
