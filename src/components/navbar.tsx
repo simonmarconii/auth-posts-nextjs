@@ -22,7 +22,7 @@ export default async function NavBar() {
                         </>
                     ) : (
                         <>
-                            <Link href={`/user`}><UserCircleIcon className="w-10 h-10"/></Link>
+                            <Link href={`/${session.user?.name}`}><UserCircleIcon className="w-10 h-10"/></Link>
                             <p>|</p>
                             <SignOut/>
                         </>

@@ -26,7 +26,7 @@ export default function RegisterPage() {
 
     async function onSubmit(values: z.infer<typeof RegisterSchema>) {
         try {
-            const response = await fetch("http://localhost:3000/api/auth/register", {
+            const res = await fetch("http://localhost:3000/api/auth/register", {
                 method: "POST",
                 body: JSON.stringify({
                     name: values.name,
@@ -35,7 +35,7 @@ export default function RegisterPage() {
                 })
             })
 
-            if(response.status === 200) router.push("/auth/signin");
+            if(res.status === 200) router.push("/auth/signin");
         } catch (error: any) {
             console.log("Something went wrong");
         }

@@ -11,11 +11,16 @@ export async function GET(req: NextRequest, context: {
         const { name } = context;
 
         const user = await users.User.findOne({ userName: name });
-        if (!user) return NextResponse.json({ error: "Error to get posts" });
+        if (!user) return NextResponse.json({ error: "Error to get user" });
 
         const userPosts = await users.Post.find({ _id: { $in: user.posts } });
 
-        return NextResponse.json({ userPosts });
+        return NextResponse.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            userPosts
+        });
     } catch (error: any) {
         throw new Error(error)
     }

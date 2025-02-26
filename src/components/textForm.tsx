@@ -10,6 +10,7 @@ import { z } from "zod";
 import { PostSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { revalidatePath } from "next/cache";
+import { handleCreatePost } from "@/action/postsActions";
 
 export default function TextForm({ userName, isDisabled }: {
     userName: string, isDisabled: boolean
@@ -24,16 +25,11 @@ export default function TextForm({ userName, isDisabled }: {
 
     async function onSubmit(values: z.infer<typeof PostSchema>) {
         try {
-            const response = await fetch("http://localhost:3000/api/create-post", {
-                method: "POST",
-                body: JSON.stringify({
-                    title: values.title,
-                    content: values.content,
-                    userName
-                })
-            });
+            const newPost = await handleCreatePost(values.title, values.content, userName);
 
-            if(response.status === 200) revalidatePath("/");
+            if(!newPost) return null;
+
+            revalidatePath("/");
         } catch (error) {
             throw error;
         }
