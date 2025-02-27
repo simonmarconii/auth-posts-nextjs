@@ -1,7 +1,7 @@
 "use client"
 
 import { useForm } from "react-hook-form";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
@@ -11,6 +11,7 @@ import { PostSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { revalidatePath } from "next/cache";
 import { handleCreatePost } from "@/action/postsActions";
+import Link from "next/link";
 
 export default function TextForm({ userName, isDisabled }: {
     userName: string, isDisabled: boolean
@@ -36,7 +37,7 @@ export default function TextForm({ userName, isDisabled }: {
     }
 
     return (
-        <div className="flex items-center justify-center">
+        <div className="w-[1200px]">
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
@@ -63,6 +64,7 @@ export default function TextForm({ userName, isDisabled }: {
                         )}
                     />
                     <FormField
+                        disabled={isDisabled}
                         control={form.control}
                         name="content"
                         render={({ field }) => (
@@ -79,7 +81,13 @@ export default function TextForm({ userName, isDisabled }: {
                             </FormItem>
                         )}
                     />
-                    <Button disabled={isDisabled} type="submit">Post</Button>
+                    {isDisabled ?
+                        (
+                            <Link href={"/auth/signin"} className={buttonVariants({variant: "default"})}>Post</Link>
+                        ):(
+                            <Button type="submit">Post</Button>
+                        )
+                    }
                 </form>
             </Form>
         </div>

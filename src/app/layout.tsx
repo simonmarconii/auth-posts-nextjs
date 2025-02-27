@@ -17,11 +17,15 @@ export default function RootLayout({
     <SessionProvider>
       <html lang="en">
         <body
-          className="m-10"
+          className="flex justify-center"
         >
-          <NavBar />
-          <div className="m-8">
-            {children}
+          <div className="w-[1200px]">
+            <div className="my-10">
+              <NavBar />
+            </div>
+            <div className="m-24">
+              {children}
+            </div>
           </div>
         </body>
       </html>

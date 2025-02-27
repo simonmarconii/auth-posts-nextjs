@@ -1,4 +1,3 @@
-import { auth } from "@/auth";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 

@@ -30,6 +30,7 @@ const UserSchema = new mongoose.Schema<IUser>(
     },
     name: {
       type: String,
+      required: true,
       unique: true
     },
     posts: [{
