@@ -45,7 +45,7 @@ export default function RegisterPage() {
         <div className="flex items-center justify-center">
             <Card className="w-[350px]">
                 <CardHeader>
-                    <CardTitle className="text-3xl font-bold text-center text-gray-800">
+                    <CardTitle className="text-3xl font-bold text-center">
                         Register
                     </CardTitle>
                 </CardHeader>

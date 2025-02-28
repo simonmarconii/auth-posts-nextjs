@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/navbar";
 import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "@/components/themeProvider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,14 +20,21 @@ export default function RootLayout({
         <body
           className="flex justify-center"
         >
-          <div className="w-[1200px]">
-            <div className="my-10">
-              <NavBar />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className="w-[1200px]">
+              <div className="my-10">
+                <NavBar />
+              </div>
+              <div className="m-24">
+                {children}
+              </div>
             </div>
-            <div className="m-24">
-              {children}
-            </div>
-          </div>
+          </ThemeProvider>
         </body>
       </html>
     </SessionProvider>

@@ -27,7 +27,7 @@ export default async function Home() {
         {
           posts.map(
             (post: any) => (
-              <Card key={post._id} className="hover:border-black">
+              <Card key={post._id} className="hover:border-black dark:hover:border-white">
                 <CardHeader>
                   <Link href={`/${post.userName}/post/${post._id}`}>
                     <h1 className="text-3xl font-bold">{post.title}</h1>

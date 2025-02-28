@@ -18,10 +18,17 @@ export default async function PostPage({ params }: {
 
     return (
         <div>
-            <div>
-                <Link href={`/${post.userName}`}>{post.userName}</Link>
-                <h1>{post.title}</h1>
-                <h1>{post.content}</h1>
+            <div className="grid grid-cols-1 gap-5">
+                <div className="flex justify-between items-end border-b">
+                    <h1 className="text-4xl font-bold">
+                        <Link href={`/${post.userName}`}>{post.userName}</Link>
+                    </h1>
+                    <span className="">{new Date(post.createdAt).toLocaleDateString()}</span>
+                </div>
+                <div className="grid grid-cols-1 gap-3 p-5">
+                    <h1 className="text-xl">{post.title}</h1>
+                    <h1 className="text-xl">{post.content}</h1>
+                </div>
             </div>
         </div>
     )
