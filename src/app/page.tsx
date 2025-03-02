@@ -27,17 +27,19 @@ export default async function Home() {
         {
           posts.map(
             (post: any) => (
-              <Card key={post._id} className="hover:border-black dark:hover:border-white">
-                <CardHeader>
-                  <Link href={`/${post.userName}/post/${post._id}`}>
+              <Link href={`/${post.userName}/post/${post._id}`}>
+                <Card key={post._id} className="hover:border-black dark:hover:border-white">
+                  <CardHeader>
+                    <div className="border-b">
+                      <p>{post.userName}</p>
+                    </div>
                     <h1 className="text-3xl font-bold">{post.title}</h1>
-                  </Link>
-                </CardHeader>
-                <CardFooter className="flex justify-between items-center">
-                  <DeleteButton id={post._id} />
-                  <span className="text-sm">{new Date(post.createdAt).toLocaleDateString()}</span>
-                </CardFooter>
-              </Card>
+                  </CardHeader>
+                  <CardFooter className="flex justify-end items-center">
+                    <span className="text-sm">{new Date(post.createdAt).toLocaleDateString()}</span>
+                  </CardFooter>
+                </Card>
+              </Link>
             ))
         }
       </div>

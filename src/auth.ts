@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { LogInSchema } from "./lib/zod";
 import users from "./lib/models/users";
-import bcrypt from "bcryptjs";
+import bcryptjs from "bcryptjs";
 import { connectDB } from "./lib/db";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -29,7 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     return null;
                 }
 
-                const pwdMatch = bcrypt.compare(password, userFind.password);
+                const pwdMatch = await bcryptjs.compare(password, userFind.password);
                 if (!pwdMatch) {
                     console.error("Wrong password");
                     return null;

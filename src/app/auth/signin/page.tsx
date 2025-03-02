@@ -12,9 +12,12 @@ import { z } from "zod";
 import { handleCredentialSignin } from "@/action/authActions";
 import ErrorMessage from "@/components/errorMessage";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
     const [globalError, setGlobalError] = useState<string>("");
+
+    const router = useRouter();
 
     const form = useForm<z.infer<typeof LogInSchema>>({
         resolver: zodResolver(LogInSchema),
@@ -29,7 +32,9 @@ export default function SignInPage() {
             const result = await handleCredentialSignin(values);
             if (result?.message) {
                 setGlobalError(result.message);
+                return;
             }
+            router.push("/");
         } catch (error: any) {
             console.log("Something went wrong");
         }
