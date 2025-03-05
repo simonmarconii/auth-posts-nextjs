@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 async function fetchPost(name: string, id: string) {
-    const res = await fetch(`http://localhost:3000/api/${name}/post/${id}`);
+    const res = await fetch(process.env.DATA_SOURCE_URL + `/${name}/post/${id}`);
     const data = await res.json();
     return data;
 }

@@ -9,9 +9,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { useRouter } from "next/navigation";
 import { handleUpdatePassword, handleUpdatePost } from "@/action/postsActions";
+import { useSession } from "next-auth/react";
 
 export function NameEditForm({ userName, item }: { userName: string, item: string }) {
     const router = useRouter();
+    const { data: session, update } = useSession();
 
     const form = useForm<z.infer<typeof NameSchema>>({
         resolver: zodResolver(NameSchema),
@@ -24,6 +26,7 @@ export function NameEditForm({ userName, item }: { userName: string, item: strin
         try {
             const result = await handleUpdatePost(item, userName, values.name);
             if (!result) return;
+            update({ name: values.name });
             router.push("/");
         } catch (error: any) {
             console.log("Something went wrong");
@@ -60,7 +63,6 @@ export function NameEditForm({ userName, item }: { userName: string, item: strin
 }
 
 export function EmailEditForm({ userName, item }: { userName: string, item: string }) {
-
     const router = useRouter();
 
     const form = useForm<z.infer<typeof EmailSchema>>({

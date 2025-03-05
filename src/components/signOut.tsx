@@ -1,12 +1,10 @@
 "use client"
 
-import { handleSignOut } from "@/action/authActions"
+import { signOut } from "next-auth/react"
 
 export default function SignOut() {
 
     return (
-        <form onSubmit={handleSignOut}>
-            <button className="text-xl hover:underline" type="submit">Sign out</button>
-        </form>
+        <button className="text-xl hover:underline" type="submit" onClick={() => signOut()}>Sign out</button>
     )
 }

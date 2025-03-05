@@ -35,10 +35,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     return null;
                 }
 
+                const userToRet = {
+                    id: userFind._id,
+                    name: userFind.name,
+                    email: userFind.email
+                }
+
                 return userFind;
             }
         })
     ],
+    callbacks: {
+        jwt({ token, trigger, session }) {
+            if (trigger === "update" && session?.name) {
+                token.name = session.name
+            }
+            return token
+        }
+    },
     pages: {
         signIn: "/auth/signin",
     }

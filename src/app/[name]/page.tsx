@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 async function fetchUser(name: string) {
-    const res = await fetch(`http://localhost:3000/api/${name}`);
+    const res = await fetch(process.env.DATA_SOURCE_URL + `/${name}`);
     const data = await res.json()
     return data;
 }
@@ -36,10 +36,10 @@ export default async function UserPage({ params }: {
                     <p>{user.email}</p>
                 </div>
                 <div className="absolute top-0 right-0 p-4">
-                    {isUserPorfile ?    
+                    {isUserPorfile ?
                         (
                             <Link href={`/${user.name}/edit`}><EditIcon /></Link>
-                        ):(
+                        ) : (
                             <></>
                         )
                     }
