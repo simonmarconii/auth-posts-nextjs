@@ -5,6 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card"
 import { EditIcon, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { handleUploadBgImage } from "@/action/filesActions";
+import { revalidatePath } from "next/cache";
 
 export function UpdateBgImageButton({ userName }: { userName: string }) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -38,6 +39,7 @@ export function UpdateBgImageButton({ userName }: { userName: string }) {
                                     async () => {
                                         if (file) {
                                             handleUploadBgImage(file, userName);
+                                            revalidatePath(`/${userName}`);
                                         }
                                     }
                                 }

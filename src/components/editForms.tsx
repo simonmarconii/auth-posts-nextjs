@@ -12,6 +12,7 @@ import { handleUpdatePassword, handleUpdatePost } from "@/action/postsActions";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { handleUploadProfileImage } from "@/action/filesActions";
+import { revalidatePath } from "next/cache";
 
 export function NameEditForm({ userName, item }: { userName: string, item: string }) {
     const router = useRouter();
@@ -197,6 +198,7 @@ export function ImageEditForm({ userName }: { userName: string }) {
                     async () => {
                         if (file) {
                             handleUploadProfileImage(file, userName);
+                            revalidatePath(`/${userName}`);
                         }
                     }
                 }
