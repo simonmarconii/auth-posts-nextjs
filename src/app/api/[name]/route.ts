@@ -21,7 +21,9 @@ export async function GET(req: NextRequest, {params}: {
             _id: user._id,
             name: user.name,
             email: user.email,
-            userPosts
+            bgImg: user.bgImg,
+            profileImg: user.profileImg,
+            userPosts,
         });
     } catch (error: any) {
         throw new Error(error)

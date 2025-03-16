@@ -1,6 +1,6 @@
 "use server"
 
-import { signIn, signOut } from "@/auth"
+import { signIn } from "@/auth"
 import { AuthError } from "next-auth"
 
 export async function handleCredentialSignin({ email, password }: {
@@ -24,8 +24,4 @@ export async function handleCredentialSignin({ email, password }: {
         }
         throw error;
     }
-}
-
-export async function handleSignOut() {
-    await signOut();
 }

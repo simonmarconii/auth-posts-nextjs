@@ -25,13 +25,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                 const userFind = await users.User.findOne({ email });
                 if (!userFind) {
-                    console.error("Wrong email");
                     return null;
                 }
 
                 const pwdMatch = await bcryptjs.compare(password, userFind.password);
                 if (!pwdMatch) {
-                    console.error("Wrong password");
                     return null;
                 }
 
@@ -39,6 +37,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
         })
     ],
+    callbacks: {
+        jwt({ token, trigger, session }) {
+            if (trigger === "update" && session?.name) {
+                token.name = session.name
+            }
+            return token
+        }
+    },
     pages: {
         signIn: "/auth/signin",
     }

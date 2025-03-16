@@ -1,11 +1,10 @@
 import { auth } from "@/auth";
-import DeleteButton from "@/components/deleteButton";
 import TextForm from "@/components/textForm";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 import Link from "next/link";
 
 async function fetchPosts() {
-  const res = await fetch(`http://localhost:3000/api/posts`);
+  const res = await fetch(process.env.DATA_SOURCE_URL + `/posts`);
   const data = await res.json()
   return data.posts;
 }
@@ -27,8 +26,8 @@ export default async function Home() {
         {
           posts.map(
             (post: any) => (
-              <Link href={`/${post.userName}/post/${post._id}`}>
-                <Card key={post._id} className="hover:border-black dark:hover:border-white">
+              <Link key={post._id} href={`/${post.userName}/post/${post._id}`}>
+                <Card className="hover:border-black dark:hover:border-white">
                   <CardHeader>
                     <div className="border-b">
                       <p>{post.userName}</p>

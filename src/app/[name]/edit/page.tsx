@@ -1,6 +1,6 @@
 "use client"
 
-import { EmailEditForm, NameEditForm, PasswordEditForm } from "@/components/editForms";
+import { EmailEditForm, ImageEditForm, NameEditForm, PasswordEditForm } from "@/components/editForms";
 import { Button } from "@/components/ui/button";
 import { use } from "react";
 import { useState } from "react";
@@ -22,10 +22,6 @@ const items = [
         title: "Image",
         url: "#",
     },
-    {
-        title: "Background",
-        url: "#",
-    },
 ]
 
 function editSwitch(item: string, name: string) {
@@ -36,6 +32,8 @@ function editSwitch(item: string, name: string) {
             return <EmailEditForm item={item} userName={name} />
         case "Password":
             return <PasswordEditForm userName={name} />
+        case "Image":
+            return <ImageEditForm userName={name} />
     }
 }
 
