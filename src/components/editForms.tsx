@@ -10,6 +10,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { useRouter } from "next/navigation";
 import { handleUpdatePassword, handleUpdatePost } from "@/action/postsActions";
 import { useSession } from "next-auth/react";
+import { useState } from "react";
+import { handleUploadProfileImage } from "@/action/filesActions";
 
 export function NameEditForm({ userName, item }: { userName: string, item: string }) {
     const router = useRouter();
@@ -175,5 +177,30 @@ export function PasswordEditForm({ userName }: { userName: string }) {
                 <Button type="submit">Change</Button>
             </form>
         </Form>
+    )
+}
+
+export function ImageEditForm({ userName }: { userName: string }) {
+    const [file, setFile] = useState<File>();
+
+    return (
+        <div className="flex justify-center gap-5">
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                    setFile(e.target.files?.[0]);
+                }}
+            />
+            <Button
+                onClick={
+                    async () => {
+                        if (file) {
+                            handleUploadProfileImage(file, userName);
+                        }
+                    }
+                }
+            >Upload</Button>
+        </div>
     )
 }

@@ -5,6 +5,8 @@ export interface IUser {
   email: String,
   password: String,
   name: String,
+  profileImg: String,
+  bgImg: String,
   posts: ObjectId[],
   createdAt: Date
 }
@@ -32,6 +34,13 @@ const UserSchema = new mongoose.Schema<IUser>(
       type: String,
       required: true,
       unique: true
+    },
+    profileImg: {
+      type: String,
+    },
+    bgImg: {
+      type: String,
+      default: "/background/default.jpg"
     },
     posts: [{
       type: mongoose.Schema.Types.ObjectId,

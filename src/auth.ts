@@ -25,20 +25,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                 const userFind = await users.User.findOne({ email });
                 if (!userFind) {
-                    console.error("Wrong email");
                     return null;
                 }
 
                 const pwdMatch = await bcryptjs.compare(password, userFind.password);
                 if (!pwdMatch) {
-                    console.error("Wrong password");
                     return null;
-                }
-
-                const userToRet = {
-                    id: userFind._id,
-                    name: userFind.name,
-                    email: userFind.email
                 }
 
                 return userFind;
